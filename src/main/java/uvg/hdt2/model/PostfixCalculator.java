@@ -50,7 +50,27 @@ public class PostfixCalculator implements IPostfixCalculator {
      */
     @Override
     public double evaluateExpression(String expression) throws IllegalArgumentException {
-        return 0;
+        stack = new Stack<>(); // Reinicia el stack para cada expresión
+        String[] tokens = expression.split(" ");
+
+        for (String token : tokens) {
+            if (isNumeric(token)) {
+                stack.push(Double.parseDouble(token));
+            } else {
+                if (stack.size() < 2) {
+                    throw new IllegalArgumentException("Expresión inválida");
+                }
+                double b = stack.pop();
+                double a = stack.pop();
+                stack.push(applyOperator(a, b, token));
+            }
+        }
+
+        if (stack.size() != 1) {
+            throw new IllegalArgumentException("Expresión inválida");
+        }
+
+        return stack.pop();
     }
 
     /**
