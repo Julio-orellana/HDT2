@@ -13,12 +13,12 @@ import java.io.IOException;
  * @see IStack
  * The class also can read a file with postfix expressions and evaluate them.
  */
-public class PostfixEvaluator implements IPostfixCalculator {
+public class PostfixCalculator implements IPostfixCalculator {
 
     private IStack<Double> stack;
     private String result;
 
-    public PostfixEvaluator() {
+    public PostfixCalculator() {
         this.stack = new Stack<>();
     }
 
